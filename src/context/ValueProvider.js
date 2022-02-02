@@ -1,21 +1,12 @@
-import React, { createContext, useContext, useState, useMemo } from 'react'
+import React, { createContext, useContext, useState } from 'react'
 
 const ValueContext = createContext();
 
-export const useValue = () => {
-    const context = useContext(ValueContext)
-    return context
-}
-
-
-
-const ValueProvider = ({children}) => {
-    const [val, setVal] = useState('');
+export const useValue = () => useContext(ValueContext)
     
-    const valueObject = useMemo(() => {
-        return { val, setVal }
-    }, [val, setVal])
-    return <ValueContext.Provider value={valueObject}>{children}
+const ValueProvider = ({children}) => {
+    const [val, setVal] = useState(null);
+    return <ValueContext.Provider value={{val, setVal}}>{children}
     </ValueContext.Provider>
 }
 
